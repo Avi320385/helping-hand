@@ -24,7 +24,8 @@ class RegisterController extends Controller
            Register::create([
             'name' => $request->name,
             'email'=>$request->email,
-            'password'=>$request->password
+            'password'=>$request->password,
+            'enum'=>$request->enum
         ],[
              'name.required' => 'please add name',
              'email.required'=>'please add valid email'
