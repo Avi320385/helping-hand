@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Register;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class RegisterController extends Controller
               'password'=>'required'
 
            ]);
-           User::create([
+           Register::create([
             'name' => $request->name,
             'email'=>$request->email,
             'password'=>$request->password
@@ -29,12 +30,12 @@ class RegisterController extends Controller
              'email.required'=>'please add valid email'
         ]);
 
-           $user = new User();
+        //    $register = new Register();
 
-           $user->name = $request->name;
-           $user->email=$request->email;
-           $user->password=$request->password;
-           $user->save();
+        //     $register->name = $request->name;
+        //     $register->email=$request->email;
+        //     $register->password=$request->password;
+        //     $register->save();
            return 'created';
     }
 }
