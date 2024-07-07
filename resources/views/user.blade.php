@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    user
 <a href="{{route('logout')}}">Log Out</a>
 </body>
 </html>

@@ -46,4 +46,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function worker_profiles(){
+        return $this->hasMany(WorkerProfile::class);
+    }
 }

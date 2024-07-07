@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>it's worker</h1>
+    <a href="{{url('worker-profile')}}">Create Your Profile</a>
 <a href="{{route('logout')}}">Log Out</a>
 </body>
 </html>

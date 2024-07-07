@@ -9,14 +9,26 @@
     <form action="{{url('register/create')}}" method="POST" >
     @csrf
         NAME:<input type="text"name="name">
+        @error('name')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
         <br>
         EMAIL:<input type="email" name="email">
+        @error('email')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
         <br>
         PASSWORD:<input type="password" name="password">
-        <br>
-
-        CONFIRM PASSWORD:<input type="password" name="Confirm Password">
-        <br>
+        @error('password')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+       <br>
+       <label for="password_confirmation">Confirm Password</label>
+       <input type="password" name="password_confirmation" id="password_confirmation" required>
+       @error('password_confirmation')
+       <div class="alert alert-danger">{{ $message }}</div>
+       @enderror
+            <br>
 
         REGISTER AS <select name="type">
                 <option value="user">User</option>

@@ -17,10 +17,19 @@ class RegisterController extends Controller
     public function create(Request $request)
     {
            $request->validate([
-              'name'=>'required',
-              'email'=>'required',
-              'password'=>'required',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:6',
+            'password_confirmation' => 'required_with:password|same:password|min:6'
               //'enum'=>'required'
+
+           ],[
+            'name.required' => 'Please add a name',
+            'email.required' => 'Please add a valid email',
+            'email.email' => 'The email must be a valid email address',
+            'password.required' => 'Please enter a valid password',
+            'password.min' => 'The password must be at least 6 characters',
+            'password.confirmed' => 'The password confirmation does not match',
 
            ]);
            User::create([
@@ -28,9 +37,6 @@ class RegisterController extends Controller
             'email'=>$request->email,
             'password'=>$request->password,
             'type' => $request->type,
-        ],[
-             'name.required' => 'please add name',
-             'email.required'=>'please add valid email'
         ]);
 
         if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password])) {
@@ -45,3 +51,4 @@ class RegisterController extends Controller
         }
     }
 }
+
