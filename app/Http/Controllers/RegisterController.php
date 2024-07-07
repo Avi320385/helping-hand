@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Register;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -18,25 +19,29 @@ class RegisterController extends Controller
            $request->validate([
               'name'=>'required',
               'email'=>'required',
-              'password'=>'required'
+              'password'=>'required',
+              //'enum'=>'required'
 
            ]);
-           Register::create([
+           User::create([
             'name' => $request->name,
             'email'=>$request->email,
             'password'=>$request->password,
-            'enum'=>$request->enum
+            'type' => $request->type,
         ],[
              'name.required' => 'please add name',
              'email.required'=>'please add valid email'
         ]);
 
-        //    $register = new Register();
+        if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password])) {
+            $request->session()->regenerate();
 
-        //     $register->name = $request->name;
-        //     $register->email=$request->email;
-        //     $register->password=$request->password;
-        //     $register->save();
-           return 'created';
+            //return 'logged in';
+            if (Auth::user()->type=='user') {
+                return view('user');
+             } else if (Auth::user()->type=='worker') {
+                 return view('worker');
+               }
+        }
     }
 }
